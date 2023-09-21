@@ -68,8 +68,8 @@ time.sleep(3)
 #add new module
 #generate random string for input
 
-random_string = ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for _ in range(10))
+#random_string = ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for _ in range(10))
 
-new_mdl_form = driver.find_element(By.NAME, 'siteName ')
-new_mdl_form.send_keys(random_string)
-time.sleep(4)
+#new_mdl_form = driver.find_element(By.NAME, 'siteName ')
+#new_mdl_form.send_keys(random_string)
+#time.sleep(4)
