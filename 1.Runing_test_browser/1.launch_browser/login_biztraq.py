@@ -65,6 +65,18 @@ add_mdl = driver.find_element(By.XPATH, '/html/body/div[1]/app-root/div/main-nav
 add_mdl.click()
 time.sleep(3)
 
+#frame locate
+frame_1=driver.find_element(By.XPATH , '//*[@id="mat-dialog-0"]/new-module-add-dialog/div')
+if frame_1 is not None:
+    print("Frame Element found")
+else:
+    print("not found")
+
+
+#Switch to frame
+
+#driver._switch_to.frame()
+
 #add new module
 #generate random string for input
 
