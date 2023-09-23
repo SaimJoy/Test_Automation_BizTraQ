@@ -7,6 +7,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 import random
 import time
@@ -51,7 +54,7 @@ time.sleep(5)
 stn_icon= driver.find_element(By.XPATH,
                              "/html/body/div[1]/app-root/div/main-nav/mat-toolbar/mat-toolbar-row/div/button[1]/span[1]/mat-icon" )
 driver.execute_script("arguments[0].click();", stn_icon)  #there is an overlapped element thats why we used this JS method
-time.sleep(3)
+time.sleep(5)
 
 stn_btn=driver.find_element(By.XPATH, '//*[@id="mat-menu-panel-1"]/div/button[1]' )
 stn_btn.click()
@@ -66,22 +69,24 @@ add_mdl.click()
 time.sleep(3)
 
 #frame locate
-frame_1=driver.find_element(By.XPATH , '//*[@id="mat-dialog-0"]/new-module-add-dialog/div')
-if frame_1 is not None:
-    print("Frame Element found")
-else:
-    print("not found")
+modal = WebDriverWait(driver, 10).until( EC.presence_of_element_located((By.ID, "cdk-overlay-1")) )
+# Handle the modal pop-up
+# # You can interact with the elements inside the modal using their locators
+# # For example, you can click a button inside the modal pop-up:
+Name=modal.find_element(By.XPATH, '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body/div/form/mat-card/mat-card-content/div[1]/mat-form-field/div/div[1]/div/input')
+Name.send_keys("Test")
+
+sv_btn= driver.find_element(By.XPATH , '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body/div/form/mat-card-actions/button[1]/span[1]')
+sv_btn.click()
 
 
-#Switch to frame
-
-#driver._switch_to.frame()
 
 #add new module
 #generate random string for input
 
-#random_string = ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for _ in range(10))
+#random_string = ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')   _ in range(10))
 
 #new_mdl_form = driver.find_element(By.NAME, 'siteName ')
 #new_mdl_form.send_keys(random_string)
-#time.sleep(4)
+
+time.sleep(4)
