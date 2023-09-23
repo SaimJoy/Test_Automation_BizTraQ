@@ -1,3 +1,5 @@
+import string
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -74,19 +76,35 @@ modal = WebDriverWait(driver, 10).until( EC.presence_of_element_located((By.ID, 
 # # You can interact with the elements inside the modal using their locators
 # # For example, you can click a button inside the modal pop-up:
 Name=modal.find_element(By.XPATH, '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body/div/form/mat-card/mat-card-content/div[1]/mat-form-field/div/div[1]/div/input')
-Name.send_keys("Test")
+def generate_random_string(length=10):
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
+unique_value = generate_random_string()
+Name.send_keys(unique_value)
 
 sv_btn= driver.find_element(By.XPATH , '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body/div/form/mat-card-actions/button[1]/span[1]')
 sv_btn.click()
 
+#time.sleep(5)
+modal_1 = WebDriverWait(driver, 20).until( EC.presence_of_element_located((By.ID, "mat-tab-label-4-1")) )
+driver.execute_script("arguments[0].click();", modal_1)
+#Permission check box
+
+checkbox_1 = driver.find_element(By.XPATH, '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body[2]/div/app-user-access-control/mat-card/mat-card-content/mat-checkbox[1]/label/span[2]')
+driver.execute_script("arguments[0].click();", checkbox_1)
+time.sleep(3)
+checkbox_2 = driver.find_element(By.XPATH, '/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body[2]/div/app-user-access-control/mat-card/mat-card-content/mat-checkbox[2]')
+driver.execute_script("arguments[0].click();", checkbox_2)
+time.sleep(3)
+submit_button=driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/mat-dialog-container/new-module-add-dialog/div/div/mat-tab-group/div/mat-tab-body[2]/div/div/button[1]")
+driver.execute_script("arguments[0].click();", submit_button)
+
+time.sleep(10)
+
+#again check the added module is there or no
 
 
-#add new module
-#generate random string for input
 
-#random_string = ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')   _ in range(10))
+#referesh page
+#driver.refresh()
 
-#new_mdl_form = driver.find_element(By.NAME, 'siteName ')
-#new_mdl_form.send_keys(random_string)
-
-time.sleep(4)
